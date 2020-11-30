@@ -6,13 +6,13 @@ class TodoList(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='todolist_owner')
     title = models.CharField(max_length=100)
     color = models.CharField(max_length=10, choices=(
-        ('red', 'red'),
-        ('orange', 'orange'),
-        ('yellow', 'yellow'),
-        ('pink', 'pink'),
-        ('purple', 'purple'),
-        ('green', 'green'),
-        ('blue', 'blue'),
+        ('#FFBEDA', 'red'),
+        ('#FFC7AF', 'orange'),
+        ('#FFFF88', 'yellow'),
+        ('#FF77FF', 'pink'),
+        ('#DCC2FF', 'purple'),
+        ('#B1F9D0', 'green'),
+        ('#BAD3FF', 'blue'),
     ), default='blue')
 
 class Task(models.Model):
