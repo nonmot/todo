@@ -1,0 +1,18 @@
+{% extends 'TODO/base.html' %}
+{% block body %}
+
+<div class="container mt-5">
+    <div class="card" style="width: 100%;">
+        <div class="card-header">
+            TODO LIST
+            <a href="{% url 'newlist' %}" class="float-right"><i class="fas fa-plus" style="font-size: 20px;"></i></a>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for todo in todolist %}
+                <a href="{% url 'task' todo.id %}"><li class="list-group-item" style="background-color: {{ todo.color }}; color: white;">{{ todo.title }}</li></a>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock body %}

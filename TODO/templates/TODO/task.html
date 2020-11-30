@@ -1,0 +1,17 @@
+{% extends 'TODO/base.html' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                {{ todolist.title }}
+            <a href="{% url 'newtask' todolist.id %}" class="float-right"><i class="fas fa-plus" style="font-size: 20px;"></i></a>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for task in tasks %}
+                    <li class="list-group-item">{{ task.title }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock body %}
