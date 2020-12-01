@@ -8,4 +8,5 @@ urlpatterns = [
     path('newtask/<int:pk>', views.newTask, name="newtask"),
     path('deletelist/<int:pk>', views.deleteTodolist, name="deletelist"),
     path('editlist/<int:pk>', views.editTodolist, name="editlist"),
+    # path('deletetask/<int:listpk>/<int:taskpk>', views.deleteTask, name="deletetask"),
 ]

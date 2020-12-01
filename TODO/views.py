@@ -23,6 +23,7 @@ def task(request, pk):
     }
     return render(request, 'TODO/task.html', params)
 
+# CRUD for TodoList
 def newList(request):
     if request.method == 'POST':
         obj = TodoList()
@@ -36,25 +37,6 @@ def newList(request):
         'form': form,
     }
     return render(request, 'TODO/newList.html', params)
-
-def newTask(request, pk):
-    if request.method == 'POST':
-        obj = Task()
-        obj.owner = request.user
-        # Taskインスタンスのtodolistに現在のtodolistを設定
-        obj.todolist = TodoList.objects.get(id=pk)
-        newtask = TaskForm(request.POST, instance=obj)
-        newtask.save()
-        #リダイレクト先に元のTodolistに戻したい
-        redirect_path = '/task/' + str(pk)
-        return redirect(to=redirect_path)
-    else:
-        form = TaskForm()
-    params = {
-        'form': form,
-        'id': pk,
-    }
-    return render(request, 'TODO/newtask.html', params)
 
 def deleteTodolist(request, pk):
     if request.method == 'POST':
@@ -73,3 +55,30 @@ def editTodolist(request, pk):
         'id': pk,
     }
     return render(request, 'TODO/edit.html', params)
+
+# CRUD for Task
+def newTask(request, pk):
+    if request.method == 'POST':
+        obj = Task()
+        obj.owner = request.user
+        # Taskインスタンスのtodolistに現在のtodolistを設定
+        obj.todolist = TodoList.objects.get(id=pk)
+        newtask = TaskForm(request.POST, instance=obj)
+        newtask.save()
+        #リダイレクト先に元のTodolist
+        redirect_path = '/task/' + str(pk)
+        return redirect(to=redirect_path)
+    else:
+        form = TaskForm()
+    params = {
+        'form': form,
+        'id': pk,
+    }
+    return render(request, 'TODO/newtask.html', params)
+
+def deleteTask(request, listpk, taskpk):
+    if request.method == 'POST':
+        task = Task.objects.filter(id=taskpk)
+        task.delete()
+        redirect_path = 'task/' + str(listpk)
+        return redirect(to=redirect_path)

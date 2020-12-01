@@ -9,7 +9,13 @@
             </div>
             <ul class="list-group list-group-flush">
                 {% for task in tasks %}
-                    <li class="list-group-item">{{ task.title }}</li>
+                    <li class="list-group-item">
+                        {{ task.title }}
+                        <form action="{% url 'deletetask' listpk=todolist.id taskpk=task.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">削除</button>
+                        </form>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
