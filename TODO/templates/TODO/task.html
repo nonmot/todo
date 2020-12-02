@@ -11,10 +11,8 @@
                 {% for task in tasks %}
                     <li class="list-group-item">
                         {{ task.title }}
-                        <form action="{% url 'deletetask' listpk=todolist.id taskpk=task.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">削除</button>
-                        </form>
+                        <a class="float-right" href="{% url 'edittask' todolist.id task.id %}"><i class="fas fa-info-circle" style="font-size: 20px;"></i></a>
+                        <p class="small">{{ task.note }}</p>
                     </li>
                 {% endfor %}
             </ul>

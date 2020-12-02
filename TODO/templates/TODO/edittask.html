@@ -1,0 +1,16 @@
+{% extends 'TODO/base.html' %}
+
+
+{% block body %}
+    <div class="container">
+        <form action="{% url 'edittask' listpk taskpk %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">変更</button>
+        </form>
+        <form action="{% url 'deletetask' listpk taskpk %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">削除</button>
+        </form>
+    </div>
+{% endblock body %}

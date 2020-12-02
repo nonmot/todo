@@ -13,7 +13,7 @@
                     <a href="{% url 'task' todo.id %}">
                         {{ todo.title }}
                     </a>
-                    <form action="{% url 'editlist' todo.id %}">{% csrf_token %}<button type="submit">編集</button></form>
+                    <a class="float-right" href="{% url 'editlist' todo.id %}"><i class="fas fa-info-circle" style="font-size: 20px;"></i></a>
                 </li>
             {% endfor %}
         </ul>

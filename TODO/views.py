@@ -54,7 +54,7 @@ def editTodolist(request, pk):
         'form': TodoListForm(instance=obj),
         'id': pk,
     }
-    return render(request, 'TODO/edit.html', params)
+    return render(request, 'TODO/editlist.html', params)
 
 # CRUD for Task
 def newTask(request, pk):
@@ -80,5 +80,19 @@ def deleteTask(request, listpk, taskpk):
     if request.method == 'POST':
         task = Task.objects.filter(id=taskpk)
         task.delete()
-        redirect_path = 'task/' + str(listpk)
+        redirect_path = '/task/' + str(listpk)
         return redirect(to=redirect_path)
+
+def editTask(request, listpk, taskpk):
+    obj = Task.objects.get(id=taskpk)
+    if request.method == 'POST':
+        task = TaskForm(request.POST, instance=obj)
+        task.save()
+        redirect_url = '/task/' + str(listpk)
+        return redirect(to=redirect_url)
+    params = {
+        'form': TaskForm(instance=obj),
+        'listpk': listpk,
+        'taskpk': taskpk,
+    }
+    return render(request, 'TODO/edittask.html', params)
