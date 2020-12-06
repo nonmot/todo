@@ -3,13 +3,18 @@ from .models import TodoList, Task
 from .forms import TodoListForm, TaskForm
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+import datetime
 
 # Create your views here.
 
+@login_required
 def home(request):
-    todolist = TodoList.objects.all()
+    todolist = TodoList.objects.filter(owner=request.user)
+    todaytask = Task.objects.filter(owner=request.user).filter(deadline=datetime.date.today())
     params = {
         'todolist': todolist,
+        'todaytask': todaytask,
     }
     return render(request, 'TODO/todolist.html', params)
 

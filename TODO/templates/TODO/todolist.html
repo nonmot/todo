@@ -21,3 +21,23 @@
 </div>
 
 {% endblock body %}
+
+
+{% block todaytask %}
+<div class="container mt-5">
+    <div class="card" style="width: 100%;">
+        <div class="card-header">
+            TODAY'S TASK
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for task in todaytask %}
+                <li class="list-group-item" style="background-color: {{ task.todolist.color }}; color: black;">
+                    {{ task.title }}
+                    <a class="float-right" href="{% url 'edittask' task.todolist.id task.id %}"><i class="fas fa-info-circle" style="font-size: 20px;"></i></a>
+                    <p class="small">{{ task.note }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock todaytask %}

@@ -13,6 +13,7 @@
                         {{ task.title }}
                         <a class="float-right" href="{% url 'edittask' todolist.id task.id %}"><i class="fas fa-info-circle" style="font-size: 20px;"></i></a>
                         <p class="small">{{ task.note }}</p>
+                        <p class="small float-right">{{ task.deadline }}</p>
                     </li>
                 {% endfor %}
             </ul>
